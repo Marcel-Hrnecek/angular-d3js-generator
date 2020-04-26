@@ -1,13 +1,20 @@
+import {BrowserModule} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 
+import {AppRoutingModule} from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SunburstComponent } from './sunburst/sunburst.component';
+import {SunburstComponent} from "./sunburst/sunburst.component";
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule ],
-  declarations: [ AppComponent, SunburstComponent ],
-  bootstrap:    [ AppComponent ]
+  declarations: [
+    AppComponent,
+    SunburstComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
