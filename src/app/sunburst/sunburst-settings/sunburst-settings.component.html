@@ -1,7 +1,15 @@
-<label for="color-input">Color Input: </label>
-<input type="color" [ngModel]="ano_color" (ngModelChange)="updateYesColor($event)" id="color-input">
+<div class="input-field">
+  <label for="color-input">Color Input: </label>
+  <input type="color" [ngModel]="ano_color" (ngModelChange)="updateYesColor($event)" id="color-input">
+</div>
 
-<br>
+<div class="input-field">
+  <label for="ano-value">Ano: </label>
+  <input type="number" [ngModel]="real_ano_value" (ngModelChange)="updateRealAnoValue($event)" id="ano-value">
+</div>
 
-<label for="ano-value">Ano: </label>
-<input type="number" [ngModel]="real_ano_value" (ngModelChange)="updateRealAnoValue($event)" id="ano-value">
+<div class="input-field">
+  <label for="show-text">Show Text: </label>
+  <input type="checkbox" [ngModel]="data.show_text" (ngModelChange)="data.show_text = $event; updateData()"
+         id="show-text">
+</div>

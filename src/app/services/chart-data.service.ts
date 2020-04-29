@@ -8,6 +8,7 @@ export class ChartDataService {
 
   private readonly DEFAULT_SUNBURST_DATA = {
     name: "doping",
+    show_text: true,
     children: [
       {
         name: "ano",

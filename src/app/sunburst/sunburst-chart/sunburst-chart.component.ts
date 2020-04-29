@@ -21,7 +21,6 @@ export class SunburstChartComponent implements OnInit {
   ) {
   }
 
-
   ngOnInit(): void {
     this.chartDataService.sunburstData$
       .subscribe(data => {
@@ -41,22 +40,27 @@ export class SunburstChartComponent implements OnInit {
       .attr('height', this.size)
       .attr("viewBox", `-${this.size / 2}, -${this.size / 2}, ${this.size}, ${this.size}`);
 
+    // Sunburst-Slices
     this.svg.append("g");
+    // Texts in those slices
+    this.svg.append("g")
+      .attr("pointer-events", "none")
+      .attr("text-anchor", "middle")
+      .attr("font-size", 10)
+      .attr("font-family", "sans-serif");
 
-    this.buildChart();
+    this.buildChart(data);
   }
 
   updateChart(data: any) {
-    // console.log(this.ano_color);
-    // console.log(this.data.children[0].color);
-
     this.rootData = this.partition(data);
-    this.buildChart();
+    this.buildChart(data);
   }
 
-  buildChart() {
+  buildChart(data: any) {
 
-    this.svg.select("g")
+    this.svg.selectAll("g")
+      .filter((d, i) => i === 0)
       .selectAll("path")
       .data(this.rootData.descendants().filter(d => d.depth))
       .join("path")
@@ -66,24 +70,20 @@ export class SunburstChartComponent implements OnInit {
       })
       .attr("d", this.arc());
 
-    // this.svg.append("g")
-    //   .attr("pointer-events", "none")
-    //   .attr("text-anchor", "middle")
-    //   .attr("font-size", 10)
-    //   .attr("font-family", "sans-serif")
-    //   .selectAll("text")
-    //   .data(this.rootData.descendants().filter(d => d.depth && (d.y0 + d.y1) / 2 * (d.x1 - d.x0) > 10))
-    //   .join("text")
-    //   .attr("transform", function (d) {
-    //     const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
-    //     const y = (d.y0 + d.y1) / 2;
-    //     return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
-    //   })
-    //   .attr("dy", "0.35em")
-    //   .attr("fill", "white")
-    //   .text(d => d.data.name);
-
-    // this.svg.node();
+    this.svg.selectAll("g")
+      .filter((d, i) => i === 1)
+      .style('visibility', () => data.show_text ? 'visible' : 'hidden')
+      .selectAll("text")
+      .data(this.rootData.descendants().filter(d => d.depth && (d.y0 + d.y1) / 2 * (d.x1 - d.x0) > 10))
+      .join("text")
+      .attr("transform", function (d) {
+        const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
+        const y = (d.y0 + d.y1) / 2;
+        return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
+      })
+      .attr("dy", "0.35em")
+      .attr("fill", "white")
+      .text(d => d.data.name);
   }
 
   partition(data) {
