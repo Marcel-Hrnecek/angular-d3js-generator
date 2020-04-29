@@ -91,7 +91,8 @@ export class SunburstChartComponent implements OnInit {
       .size([2 * Math.PI, this.radius])
       (d3.hierarchy(data)
         .sum(d => d.value)
-        .sort((a, b) => a.data.color === '#0ed145' ? 1 : -1))
+        .sort((a, b) => a.data.order - b.data.order)
+      )
   }
 
   arc() {
