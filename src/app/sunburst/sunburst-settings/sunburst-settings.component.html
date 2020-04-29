@@ -1,6 +1,11 @@
 <div class="input-field">
-  <label for="color-input">Color Input: </label>
-  <input type="color" [ngModel]="ano_color" (ngModelChange)="updateYesColor($event)" id="color-input">
+  <label for="color-yes-input">Color for Yes: </label>
+  <input type="color" [ngModel]="yes_color" (ngModelChange)="updateYesColor($event)" id="color-yes-input">
+</div>
+
+<div class="input-field">
+  <label for="color-no-input">Color for No: </label>
+  <input type="color" [ngModel]="no_color" (ngModelChange)="updateNoColor($event)" id="color-no-input">
 </div>
 
 <div class="input-field">

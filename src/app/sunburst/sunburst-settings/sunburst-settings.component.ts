@@ -9,7 +9,8 @@ import {ChartDataService} from "../../services/chart-data.service";
 export class SunburstSettingsComponent implements OnInit {
 
   data: any;
-  ano_color: string;
+  yes_color: string;
+  no_color: string;
   real_ano_value: number;
 
   constructor(
@@ -21,7 +22,8 @@ export class SunburstSettingsComponent implements OnInit {
     this.chartDataService.sunburstData$
       .subscribe(data => {
         this.data = data;
-        this.ano_color = this.data.children[0].color;
+        this.yes_color = this.data.children[0].color;
+        this.no_color = this.data.children[1].color;
         this.real_ano_value = this.data.children[0].children[1].value;
 
       });
@@ -32,17 +34,22 @@ export class SunburstSettingsComponent implements OnInit {
   }
 
   updateYesColor(newColor: string) {
-    this.updateYesColorData(this.data, newColor);
+    this.updateColorData(this.data, newColor, 'yes');
     this.updateData();
   }
 
-  private updateYesColorData(data, newColor: string) {
+  updateNoColor(newColor: string) {
+    this.updateColorData(this.data, newColor, 'no');
+    this.updateData();
+  }
+
+  private updateColorData(data, newColor: string, type: string) {
     data.children.forEach(dataPoint => {
-      if (dataPoint.color_type === 'yes') {
+      if (dataPoint.color_type === type) {
         dataPoint.color = newColor;
       }
       if (dataPoint.children) {
-        this.updateYesColorData(dataPoint, newColor);
+        this.updateColorData(dataPoint, newColor, type);
       }
     });
   }
