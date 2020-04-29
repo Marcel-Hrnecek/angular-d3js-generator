@@ -1,0 +1,7 @@
+<label for="color-input">Color Input: </label>
+<input type="color" [ngModel]="ano_color" (ngModelChange)="updateYesColor($event)" id="color-input">
+
+<br>
+
+<label for="ano-value">Ano: </label>
+<input type="number" [ngModel]="real_ano_value" (ngModelChange)="updateRealAnoValue($event)" id="ano-value">
