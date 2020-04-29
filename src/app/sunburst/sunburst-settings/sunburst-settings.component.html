@@ -13,3 +13,10 @@
   <input type="checkbox" [ngModel]="data.show_text" (ngModelChange)="data.show_text = $event; updateData()"
          id="show-text">
 </div>
+
+
+<div class="input-field">
+  <label for="rotate-text">Rotate Text: </label>
+  <input type="checkbox" [ngModel]="data.rotate_text" (ngModelChange)="data.rotate_text = $event; updateData()"
+         id="rotate-text">
+</div>

@@ -76,17 +76,19 @@ export class SunburstChartComponent implements OnInit {
       .selectAll("text")
       .data(this.rootData.descendants().filter(d => d.depth && (d.y0 + d.y1) / 2 * (d.x1 - d.x0) > 10))
       .join("text")
-      .attr("transform", function (d) {
-        const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
-        const y = (d.y0 + d.y1) / 2;
-        return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
+      .attr("transform", (d) => {
+        if (data.rotate_text) {
+          return this.rotateText(d);
+        } else {
+          return this.straightText(d);
+        }
       })
       .attr("dy", "0.35em")
       .attr("fill", "white")
       .text(d => d.data.name);
   }
 
-  partition(data) {
+  private partition(data) {
     return d3.partition()
       .size([2 * Math.PI, this.radius])
       (d3.hierarchy(data)
@@ -95,7 +97,7 @@ export class SunburstChartComponent implements OnInit {
       )
   }
 
-  arc() {
+  private arc() {
     return d3.arc()
       .startAngle(d => d.x0)
       .endAngle(d => d.x1)
@@ -103,5 +105,18 @@ export class SunburstChartComponent implements OnInit {
       .padRadius(this.radius / 2)
       .innerRadius(d => d.y0)
       .outerRadius(d => d.y1 - 1);
+  }
+
+  private rotateText(d) {
+    const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
+    const y = (d.y0 + d.y1) / 2;
+    return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
+  }
+
+  private straightText(d) {
+    const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
+    const y = (d.y0 + d.y1) / 2;
+    return `rotate(${x - 90}) translate(${y},0) rotate(${-(x - 90)})`;
+
   }
 }
