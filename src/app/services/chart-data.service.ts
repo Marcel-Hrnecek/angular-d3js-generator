@@ -10,6 +10,7 @@ export class ChartDataService {
     name: "doping",
     show_text: true,
     rotate_text: false,
+    inner_opacity: 60,
     children: [
       {
         name: "ano",

@@ -8,6 +8,13 @@
   <input type="color" [ngModel]="no_color" (ngModelChange)="updateNoColor($event)" id="color-no-input">
 </div>
 
+
+<div class="input-field">
+  <label for="inner-opacity">Inner Opacity</label>
+  <input type="range" [ngModel]="data.inner_opacity" (ngModelChange)="data.inner_opacity = $event; updateData()"
+         id="inner-opacity">
+</div>
+
 <div class="input-field">
   <label for="ano-value">Ano: </label>
   <input type="number" [ngModel]="real_ano_value" (ngModelChange)="updateRealAnoValue($event)" id="ano-value">

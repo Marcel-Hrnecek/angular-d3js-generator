@@ -66,7 +66,7 @@ export class SunburstChartComponent implements OnInit {
       .join("path")
       .attr("fill", d => d.data.color)
       .attr("fill-opacity", d => {
-        if (d && d.depth === 1) return 0.6; else return 1;
+        if (d && d.depth === 1) return (data.inner_opacity / 100); else return 1;
       })
       .attr("d", this.arc());
 
