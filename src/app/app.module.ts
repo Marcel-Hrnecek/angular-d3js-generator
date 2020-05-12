@@ -7,6 +7,7 @@ import {SunburstComponent} from "./sunburst/sunburst.component";
 import {FormsModule} from "@angular/forms";
 import {SunburstChartComponent} from "./sunburst/sunburst-chart/sunburst-chart.component";
 import {SunburstSettingsComponent} from "./sunburst/sunburst-settings/sunburst-settings.component";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {SunburstSettingsComponent} from "./sunburst/sunburst-settings/sunburst-s
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
