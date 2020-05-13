@@ -1,34 +1,50 @@
-<div class="input-field">
-  <label for="color-yes-input">Color for Yes: </label>
-  <input type="color" [ngModel]="yes_color" (ngModelChange)="updateYesColor($event)" id="color-yes-input">
-</div>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      General Settings
+    </mat-expansion-panel-header>
 
-<div class="input-field">
-  <label for="color-no-input">Color for No: </label>
-  <input type="color" [ngModel]="no_color" (ngModelChange)="updateNoColor($event)" id="color-no-input">
-</div>
+    <div>
+      <label for="inner-opacity">Inner Opacity</label>
+      <mat-slider
+        id="inner-opacity"
+        [ngModel]="data.inner_opacity"
+        (ngModelChange)="data.inner_opacity = $event; updateData()"
+      ></mat-slider>
+    </div>
 
+  </mat-expansion-panel>
 
-<div class="input-field">
-  <label for="inner-opacity">Inner Opacity</label>
-  <input type="range" [ngModel]="data.inner_opacity" (ngModelChange)="data.inner_opacity = $event; updateData()"
-         id="inner-opacity">
-</div>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      Text Settings
+    </mat-expansion-panel-header>
 
-<div class="input-field">
-  <label for="ano-value">Ano: </label>
-  <input type="number" [ngModel]="real_ano_value" (ngModelChange)="updateRealAnoValue($event)" id="ano-value">
-</div>
+    <mat-checkbox
+      [ngModel]="data.show_text"
+      (ngModelChange)="data.show_text = $event; updateData()"
+      labelPosition="before"
+    >
+      Show Text
+    </mat-checkbox>
 
-<div class="input-field">
-  <label for="show-text">Show Text: </label>
-  <input type="checkbox" [ngModel]="data.show_text" (ngModelChange)="data.show_text = $event; updateData()"
-         id="show-text">
-</div>
+    <br>
+    <!--For some extra spacing-->
+    <p></p>
 
+    <mat-checkbox
+      [ngModel]="data.rotate_text"
+      (ngModelChange)="data.rotate_text = $event; updateData()"
+      labelPosition="before"
+    >
+      Rotate Text
+    </mat-checkbox>
+  </mat-expansion-panel>
+</mat-accordion>
 
-<div class="input-field">
-  <label for="rotate-text">Rotate Text: </label>
-  <input type="checkbox" [ngModel]="data.rotate_text" (ngModelChange)="data.rotate_text = $event; updateData()"
-         id="rotate-text">
+<div class="data_settings">
+  <h2>Data Settings</h2>
+
+  <app-data-settings></app-data-settings>
+
 </div>
