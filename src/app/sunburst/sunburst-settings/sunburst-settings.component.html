@@ -29,8 +29,7 @@
     </mat-checkbox>
 
     <br>
-    <!--For some extra spacing-->
-    <p></p>
+    <br>
 
     <mat-checkbox
       [ngModel]="data.rotate_text"
@@ -39,6 +38,27 @@
     >
       Rotate Text
     </mat-checkbox>
+
+    <br>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Size</mat-label>
+      <input matInput
+             type="number"
+             [ngModel]="data.text_size"
+             (ngModelChange)="data.text_size = $event; updateData()">
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+      <mat-label>Color</mat-label>
+      <input matInput
+             type="color"
+             [ngModel]="data.text_color"
+             (ngModelChange)="data.text_color = $event; updateData()">
+    </mat-form-field>
   </mat-expansion-panel>
 </mat-accordion>
 

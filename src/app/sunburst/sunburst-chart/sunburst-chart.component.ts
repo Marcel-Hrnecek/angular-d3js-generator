@@ -32,7 +32,7 @@ export class SunburstChartComponent implements OnInit {
       });
   }
 
-  createChart(data: any) {
+  createChart(data: MainData) {
     this.rootData = this.partition(data);
 
     this.svg = d3.select('.chartContainer').append('svg')
@@ -52,12 +52,12 @@ export class SunburstChartComponent implements OnInit {
     this.buildChart(data);
   }
 
-  updateChart(data: any) {
+  updateChart(data: MainData) {
     this.rootData = this.partition(data);
     this.buildChart(data);
   }
 
-  buildChart(data: any) {
+  buildChart(data: MainData) {
 
     this.svg.selectAll("g")
       .filter((d, i) => i === 0)
@@ -73,6 +73,7 @@ export class SunburstChartComponent implements OnInit {
     this.svg.selectAll("g")
       .filter((d, i) => i === 1)
       .style('visibility', () => data.show_text ? 'visible' : 'hidden')
+      .attr("font-size", data.text_size)
       .selectAll("text")
       .data(this.rootData.descendants().filter(d => d.depth && (d.y0 + d.y1) / 2 * (d.x1 - d.x0) > 10))
       .join("text")
@@ -84,7 +85,7 @@ export class SunburstChartComponent implements OnInit {
         }
       })
       .attr("dy", "0.35em")
-      .attr("fill", "white")
+      .attr("fill", () => data.text_color)
       .text(d => d.data.name);
   }
 
