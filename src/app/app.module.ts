@@ -8,21 +8,36 @@ import {FormsModule} from "@angular/forms";
 import {SunburstChartComponent} from "./sunburst/sunburst-chart/sunburst-chart.component";
 import {SunburstSettingsComponent} from "./sunburst/sunburst-settings/sunburst-settings.component";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatCardModule} from "@angular/material/card";
+import {MatSliderModule} from "@angular/material/slider";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatInputModule} from "@angular/material/input";
+import {MatExpansionModule} from "@angular/material/expansion";
+import {DataSettingsComponent} from './components/data-settings/data-settings.component';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 @NgModule({
   declarations: [
     AppComponent,
     SunburstComponent,
     SunburstChartComponent,
-    SunburstSettingsComponent
+    SunburstSettingsComponent,
+    DataSettingsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatSliderModule,
+    MatCheckboxModule,
+    MatInputModule,
+    MatExpansionModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

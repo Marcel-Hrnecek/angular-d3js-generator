@@ -1,0 +1,88 @@
+<mat-card *ngFor="let data_1 of data.children; index as i">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput
+           [ngModel]="data_1.name"
+           (ngModelChange)="data.children[i].name = $event; updateData()">
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
+    <mat-label>Color</mat-label>
+    <input matInput
+           type="color"
+           [ngModel]="data_1.color"
+           (ngModelChange)="updateColor($event, i)">
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
+    <mat-label>Order</mat-label>
+    <input matInput
+           type="number"
+           [ngModel]="data_1.order"
+           (ngModelChange)="data.children[i].order = $event; updateData()">
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field *ngIf="!data_1.children">
+    <mat-label>Value</mat-label>
+    <input matInput
+           type="number"
+           [ngModel]="data_1.value"
+           (ngModelChange)="data.children[i].value = $event; updateData()">
+  </mat-form-field>
+
+  <ng-container *ngIf="data_1.children">
+    <mat-card *ngFor="let data_2 of data_1.children; index as j">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput
+               [ngModel]="data_2.name"
+               (ngModelChange)="data.children[i].children[j].name = $event; updateData()">
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field>
+        <mat-label>Value</mat-label>
+        <input matInput
+               type="number"
+               [ngModel]="data_2.value"
+               (ngModelChange)="data.children[i].children[j].value = $event; updateData()">
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field>
+        <mat-label>Order</mat-label>
+        <input matInput
+               type="number"
+               [ngModel]="data_2.order"
+               (ngModelChange)="data.children[i].children[j].order = $event; updateData()">
+      </mat-form-field>
+
+      <br>
+
+      <mat-slide-toggle
+        [ngModel]="data_2.color_from_parent"
+        (ngModelChange)="toggleColorFromParent($event, i, j)"
+      >
+        Color from parent
+      </mat-slide-toggle>
+
+      <br>
+
+      <mat-form-field *ngIf="!data_2.color_from_parent">
+        <mat-label>Color</mat-label>
+        <input matInput
+               type="color"
+               [ngModel]="data_2.color"
+               (ngModelChange)="data.children[i].children[j].color = $event; updateData()">
+      </mat-form-field>
+    </mat-card>
+  </ng-container>
+</mat-card>
