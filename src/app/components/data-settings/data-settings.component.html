@@ -1,4 +1,10 @@
 <mat-card *ngFor="let data_1 of data.children; index as i">
+
+  <button class="btn-remove"
+          (click)="onRemoveMainData(i)">
+    X
+  </button>
+
   <mat-form-field>
     <mat-label>Name</mat-label>
     <input matInput
@@ -28,16 +34,26 @@
 
   <br>
 
-  <mat-form-field *ngIf="!data_1.children">
-    <mat-label>Value</mat-label>
-    <input matInput
-           type="number"
-           [ngModel]="data_1.value"
-           (ngModelChange)="data.children[i].value = $event; updateData()">
-  </mat-form-field>
+  <ng-container *ngIf="!data_1.children || !data_1.children.length">
+    <mat-form-field>
+      <mat-label>Value</mat-label>
+      <input matInput
+             type="number"
+             [ngModel]="data_1.value"
+             (ngModelChange)="data.children[i].value = $event; updateData()">
+    </mat-form-field>
+
+    <br>
+  </ng-container>
 
   <ng-container *ngIf="data_1.children">
     <mat-card *ngFor="let data_2 of data_1.children; index as j">
+
+      <button class="btn-remove"
+              (click)="onRemoveChildData(i, j)">
+        X
+      </button>
+
       <mat-form-field>
         <mat-label>Name</mat-label>
         <input matInput

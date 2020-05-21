@@ -66,10 +66,9 @@ export class ChartDataService {
     const newParentData: ChildData = {
       name: 'NEW DATA MAIN',
       color: '#3f51b5',
-      order: ChartDataService.getNextOrderValue(currentData.children),
-      children: [
-        defaultChild
-      ]
+      value: 5,
+      children: [],
+      order: ChartDataService.getNextOrderValue(currentData.children)
     };
 
     currentData.children.push(newParentData);
@@ -84,7 +83,29 @@ export class ChartDataService {
     defaultChild.order = ChartDataService.getNextOrderValue(parentData.children);
     defaultChild.color = parentData.color;
 
+    if (parentData.children.length === 0) {
+      defaultChild.value = parentData.value;
+      parentData.value = 0;
+    }
+
     parentData.children.push(defaultChild);
+    this.sunburstDataSubject.next(currentData);
+  }
+
+  removeMainData(idx: number) {
+    const currentData: MainData = this.sunburstDataSubject.getValue();
+    currentData.children.splice(idx, 1);
+    this.sunburstDataSubject.next(currentData);
+  }
+
+  removeChildData(parentIdx: number, idx: number) {
+    const currentData: MainData = this.sunburstDataSubject.getValue();
+    const parentData = currentData.children[parentIdx];
+
+    const removedChild = parentData.children.splice(idx, 1)[0];
+    if (parentData.children.length === 0) {
+      parentData.value = removedChild.value;
+    }
     this.sunburstDataSubject.next(currentData);
   }
 

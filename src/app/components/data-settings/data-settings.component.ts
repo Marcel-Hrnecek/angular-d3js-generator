@@ -56,4 +56,12 @@ export class DataSettingsComponent implements OnInit {
   onAddChildData(parentIdx: number) {
     this.chartDataService.addChildData(parentIdx);
   }
+
+  onRemoveMainData(idx: number) {
+    this.chartDataService.removeMainData(idx);
+  }
+
+  onRemoveChildData(parentIdx: number, idx: number) {
+    this.chartDataService.removeChildData(parentIdx, idx);
+  }
 }
