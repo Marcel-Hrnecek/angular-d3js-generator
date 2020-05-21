@@ -58,4 +58,50 @@ export class ChartDataService {
   updateSunburstData(newData: MainData) {
     this.sunburstDataSubject.next(newData);
   }
+
+  addMainData() {
+    const currentData: MainData = this.sunburstDataSubject.getValue();
+    const defaultChild = ChartDataService.createDefaultChild();
+
+    const newParentData: ChildData = {
+      name: 'NEW DATA MAIN',
+      color: '#3f51b5',
+      order: ChartDataService.getNextOrderValue(currentData.children),
+      children: [
+        defaultChild
+      ]
+    };
+
+    currentData.children.push(newParentData);
+    this.sunburstDataSubject.next(currentData);
+  }
+
+  addChildData(parentIdx: number) {
+    const currentData: MainData = this.sunburstDataSubject.getValue();
+    const parentData = currentData.children[parentIdx];
+
+    const defaultChild = ChartDataService.createDefaultChild();
+    defaultChild.order = ChartDataService.getNextOrderValue(parentData.children);
+    defaultChild.color = parentData.color;
+
+    parentData.children.push(defaultChild);
+    this.sunburstDataSubject.next(currentData);
+  }
+
+  private static createDefaultChild() {
+    return {
+      name: 'NEW DATA CHILD',
+      value: 5,
+      order: 1,
+      color: '#3f51b5',
+      color_from_parent: true
+    };
+  }
+
+  private static getNextOrderValue(children: ChildData[]): number {
+    const currentMaxOrder = children.reduce((maxValue, child) => {
+      return maxValue < child.order ? child.order : maxValue
+    }, 0);
+    return currentMaxOrder + 1;
+  }
 }

@@ -49,4 +49,11 @@ export class DataSettingsComponent implements OnInit {
     this.updateData();
   }
 
+  onAddMainData() {
+    this.chartDataService.addMainData();
+  }
+
+  onAddChildData(parentIdx: number) {
+    this.chartDataService.addChildData(parentIdx);
+  }
 }
