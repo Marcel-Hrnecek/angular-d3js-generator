@@ -15,6 +15,8 @@ import {MatInputModule} from "@angular/material/input";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {DataSettingsComponent} from './components/data-settings/data-settings.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {DataStorageComponent} from './components/data-storage/data-storage.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     SunburstComponent,
     SunburstChartComponent,
     SunburstSettingsComponent,
-    DataSettingsComponent
+    DataSettingsComponent,
+    DataStorageComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     MatCheckboxModule,
     MatInputModule,
     MatExpansionModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

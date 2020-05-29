@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {ChartStorageService} from "./services/chart-storage.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'd3js-generator';
+
+  constructor(
+    private chartStorageService: ChartStorageService
+  ) {
+    chartStorageService.init();
+  }
 }

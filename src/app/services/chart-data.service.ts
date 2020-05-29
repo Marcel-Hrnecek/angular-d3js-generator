@@ -6,54 +6,12 @@ import {BehaviorSubject, Observable} from "rxjs";
 })
 export class ChartDataService {
 
-  private readonly DEFAULT_SUNBURST_DATA: MainData = {
-    name: "doping",
-    show_text: true,
-    rotate_text: false,
-    text_size: 10,
-    text_color: '#FFFFFF',
-    inner_opacity: 60,
-    children: [
-      {
-        name: "yes",
-        color: '#0ed145',
-        order: 2,
-        children: [
-          {
-            name: "with conditions",
-            value: 11,
-            color: '#ff6118',
-            color_from_parent: false,
-            order: 1
-          },
-          {
-            name: "no conditions",
-            value: 12,
-            color: '#0ed145',
-            color_from_parent: true,
-            order: 2
-          }
-        ]
-      },
-      {
-        name: "no",
-        color: '#ff6118',
-        order: 1,
-        children: [
-          {
-            name: "with conditions",
-            value: 27,
-            color: '#ff6118',
-            color_from_parent: true,
-            order: 1
-          }
-        ]
-      }
-    ]
-  };
-
-  private sunburstDataSubject: BehaviorSubject<MainData> = new BehaviorSubject(this.DEFAULT_SUNBURST_DATA);
+  private sunburstDataSubject: BehaviorSubject<MainData> = new BehaviorSubject(null);
   sunburstData$: Observable<MainData> = this.sunburstDataSubject.asObservable();
+
+  getCurrentData(): MainData {
+    return this.sunburstDataSubject.getValue();
+  }
 
   updateSunburstData(newData: MainData) {
     this.sunburstDataSubject.next(newData);
@@ -61,7 +19,6 @@ export class ChartDataService {
 
   addMainData() {
     const currentData: MainData = this.sunburstDataSubject.getValue();
-    const defaultChild = ChartDataService.createDefaultChild();
 
     const newParentData: ChildData = {
       name: 'NEW DATA MAIN',

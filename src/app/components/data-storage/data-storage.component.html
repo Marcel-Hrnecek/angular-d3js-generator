@@ -1,0 +1,21 @@
+<mat-form-field>
+  <mat-label>Name</mat-label>
+  <input matInput
+         [(ngModel)]="chartStorageService.currentDataName">
+</mat-form-field>
+
+<div class="action_buttons">
+  Actions:
+  <button (click)="onNew()">New</button>
+  <button (click)="onSave()">Save</button>
+  <button (click)="onDelete()">Delete</button>
+</div>
+
+<div class="data_buttons">
+  Data:
+  <button *ngFor="let storedData of chartStorageService.storedData"
+          (click)="loadData(storedData)"
+  >
+    {{storedData.name}}
+  </button>
+</div>
