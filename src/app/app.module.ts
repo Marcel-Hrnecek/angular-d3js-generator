@@ -17,6 +17,10 @@ import {DataSettingsComponent} from './components/data-settings/data-settings.co
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {DataStorageComponent} from './components/data-storage/data-storage.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {BarComponent} from './components/bar/bar.component';
+import {BarChartComponent} from './components/bar/bar-chart/bar-chart.component';
+import {BarSettingsComponent} from './components/bar/bar-settings/bar-settings.component';
+import {BarDataSettingsComponent} from './components/bar/bar-data-settings/bar-data-settings.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     SunburstChartComponent,
     SunburstSettingsComponent,
     DataSettingsComponent,
-    DataStorageComponent
+    DataStorageComponent,
+    BarComponent,
+    BarChartComponent,
+    BarSettingsComponent,
+    BarDataSettingsComponent
   ],
   imports: [
     BrowserModule,

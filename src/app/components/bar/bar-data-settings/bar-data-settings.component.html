@@ -1,0 +1,66 @@
+<mat-card>
+  <h3>Value Types</h3>
+  <mat-card *ngFor="let valueType of valueTypes">
+
+    <button class="btn-remove"
+            (click)="onRemoveValueType(valueType)">
+      X
+    </button>
+
+    <mat-form-field>
+      <mat-label>Type</mat-label>
+      <input matInput
+             [ngModel]="valueType"
+             (ngModelChange)="updateValueTypeName($event)">
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+      <mat-label>Color</mat-label>
+      <input matInput
+             type="color"
+             [ngModel]="data.contentMeta[valueType].color"
+             (ngModelChange)="updateValueTypeColor(valueType, $event)">
+    </mat-form-field>
+  </mat-card>
+
+  <button (click)="onAddValueType()">
+    Add Type
+  </button>
+</mat-card>
+
+<mat-card>
+  <h3>Groups</h3>
+
+  <mat-card *ngFor="let content of data.content; index as i">
+
+    <button class="btn-remove"
+            (click)="onRemoveGroup(i)">
+      X
+    </button>
+
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput
+             [ngModel]="content.group"
+             (ngModelChange)="updateGroupName(i, $event)">
+    </mat-form-field>
+
+    <br>
+
+    <div *ngFor="let valueType of valueTypes">
+      <mat-form-field>
+        <mat-label>{{valueType}}</mat-label>
+        <input matInput
+               type="number"
+               [ngModel]="data.content[i][valueType]"
+               (ngModelChange)="updateContentValue(i, valueType, $event)">
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <button (click)="onAddGroup()">
+    Add Group
+  </button>
+</mat-card>
