@@ -1,1 +1,58 @@
-<p>bar-settings works!</p>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      General Settings
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <mat-label>Axis Color</mat-label>
+      <input matInput
+             type="color"
+             [ngModel]="data.settings.axisColor"
+             (ngModelChange)="data.settings.axisColor = $event; updateData()">
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+      <mat-label>Axis Thickness</mat-label>
+      <input matInput
+             type="number"
+             [ngModel]="data.settings.axisThickness"
+             (ngModelChange)="data.settings.axisThickness = $event; updateData()">
+    </mat-form-field>
+
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      Text Settings
+    </mat-expansion-panel-header>
+
+    <mat-checkbox
+      [ngModel]="data.settings.textShow"
+      (ngModelChange)="data.settings.textShow = $event; updateData()"
+      labelPosition="before"
+    >
+      Show Text
+    </mat-checkbox>
+
+    <br>
+    <br>
+
+    <mat-form-field>
+      <mat-label>Size</mat-label>
+      <input matInput
+             type="number"
+             [ngModel]="data.settings.textSize"
+             (ngModelChange)="data.settings.textSize = $event; updateData()">
+    </mat-form-field>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<div class="data_settings">
+  <h2>Data Settings</h2>
+
+  <app-bar-data-settings></app-bar-data-settings>
+
+</div>

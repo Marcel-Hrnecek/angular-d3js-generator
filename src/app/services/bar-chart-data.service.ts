@@ -7,6 +7,12 @@ import {BehaviorSubject, Observable} from "rxjs";
 export class BarChartDataService {
 
   data: BarMainData = {
+    settings: {
+      axisColor: 'black',
+      axisThickness: 1,
+      textShow: true,
+      textSize: 10
+    },
     contentMeta: {
       yes: {
         color: '#0ed145'

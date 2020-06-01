@@ -45,8 +45,6 @@ export class BarChartComponent implements OnInit, OnDestroy {
     this.svg = d3.select('.chartContainer').append('svg')
       .attr('width', this.size)
       .attr('height', this.size)
-      .style('border-left', '1px solid black')
-      .style('border-bottom', '1px solid black')
       .style('overflow', 'visible');
 
     this.svg.append("g")
@@ -69,6 +67,10 @@ export class BarChartComponent implements OnInit, OnDestroy {
     this.x0 = this.computeX0(content);
     this.x1 = this.computeX1();
     this.y = this.computeY(content);
+
+    this.svg
+      .style('border-left', `${data.settings.axisThickness}px solid ${data.settings.axisColor}`)
+      .style('border-bottom', `${data.settings.axisThickness}px solid ${data.settings.axisColor}`);
 
     // Bars
     this.svg.selectAll("g.bar-group")
@@ -113,9 +115,16 @@ export class BarChartComponent implements OnInit, OnDestroy {
   }
 
   private yAxis = g => g
-    .attr("transform", `translate(0,0)`)
+    .attr("transform", `translate(-${this.rootData.settings.axisThickness},0)`)
     .call(d3.axisLeft(this.y).ticks(null, "s"))
-    .call(g => g.select(".domain").remove());
+    .call(g => g.select(".domain").remove())
+    .call(g => g.selectAll(".tick line")
+      .attr("color", this.rootData.settings.axisColor)
+    )
+    .call(g => g.selectAll(".tick text")
+      .attr("font-size", this.rootData.settings.textSize)
+      .attr("fill", this.rootData.settings.textShow ? this.rootData.settings.axisColor : 'none')
+    );
 
   ngOnDestroy(): void {
     if (this.subscription) {

@@ -1,16 +1,23 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {BarChartDataService} from "../../../services/bar-chart-data.service";
 
 @Component({
   selector: 'app-bar-settings',
   templateUrl: './bar-settings.component.html',
   styleUrls: ['./bar-settings.component.less']
 })
-export class BarSettingsComponent implements OnInit {
+export class BarSettingsComponent {
 
-  constructor() {
+  @Input()
+  data: BarMainData;
+
+  constructor(
+    public dataService: BarChartDataService
+  ) {
   }
 
-  ngOnInit(): void {
+  updateData() {
+    this.dataService.updateBarData(this.data);
   }
 
 }
